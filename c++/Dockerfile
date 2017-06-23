@@ -1,4 +1,4 @@
-FROM yujioshima/dynet:base-in-c
+FROM yujioshima/dynet:base-in-cpp
 
 # DyNet, version 4234759
 ENV DYNET_VERSION 4234759

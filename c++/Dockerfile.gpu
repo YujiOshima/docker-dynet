@@ -1,4 +1,4 @@
-FROM yujioshima/dynet:base-gpu-in-c
+FROM yujioshima/dynet:base-gpu-in-cpp
 
 # Eigen, version 3.3.4
 ENV EIGEN_VERSION 3.3.4
