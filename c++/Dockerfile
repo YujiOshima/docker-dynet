@@ -9,5 +9,5 @@ RUN cd /opt && \
         mkdir build && \
         cd build && \
         cmake .. -DEIGEN3_INCLUDE_DIR=/opt/eigen && \
-        make -j16 install
+        make -j2 install
 WORKDIR /opt/dynet
