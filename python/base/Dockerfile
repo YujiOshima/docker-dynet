@@ -3,7 +3,7 @@ FROM ubuntu:16.04
 # Build dependencies
 RUN echo "deb-src http://archive.ubuntu.com/ubuntu/ xenial main restricted" >> /etc/apt/sources.list && apt-get update && apt-get install -y wget git mercurial libgoogle-perftools-dev libsparsehash-dev libboost-all-dev autoconf libtool python python-pip
 RUN apt-get build-dep -y cmake
-RUN pip install cython
+RUN pip install cython numpy
 
 # CMake 3.8.2
 RUN cd /opt && \
