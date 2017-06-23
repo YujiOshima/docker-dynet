@@ -1,4 +1,4 @@
-FROM nvidia/cuda:8.0-cudnn5-devel
+FROM ubuntu:16.04
 
 # Build dependencies
 RUN echo "deb-src http://archive.ubuntu.com/ubuntu/ xenial main restricted" >> /etc/apt/sources.list && apt-get update && apt-get install -y wget git mercurial libgoogle-perftools-dev libsparsehash-dev libboost-all-dev autoconf libtool
@@ -10,7 +10,7 @@ RUN cd /opt && \
         tar xf cmake-3.8.2.tar.gz && \
         cd cmake-3.8.2 && \
         ./configure && \
-        make -j16 install
+        make -j2 install
 
 # Eigen, version 3.3.4
 ENV EIGEN_VERSION 3.3.4
@@ -18,16 +18,3 @@ RUN cd /opt && \
         hg clone https://bitbucket.org/eigen/eigen/ && \
         cd eigen && \
         hg update -r ${EIGEN_VERSION}
-
-# DyNet, version 4234759
-ENV DYNET_VERSION 4234759
-RUN cd /opt && \
-        git clone https://github.com/clab/dynet.git && \
-        cd dynet && \
-        git checkout ${DYNET_VERSION} && \
-        sed -i -e '/^#/!s/ -march=native//g' CMakeLists.txt && \
-        mkdir build && \
-        cd build && \
-        cmake .. -DEIGEN3_INCLUDE_DIR=/opt/eigen -DBACKEND=cuda && \
-        make -j16 install
-WORKDIR /opt/dynet

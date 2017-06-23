@@ -1,0 +1,20 @@
+FROM yujioshima/dynet:base-gpu-in-c
+
+# Eigen, version 3.3.4
+ENV EIGEN_VERSION 3.3.4
+RUN cd /opt && \
+        hg clone https://bitbucket.org/eigen/eigen/ && \
+        cd eigen && \
+        hg update -r ${EIGEN_VERSION}
+
+# DyNet, version 4234759
+ENV DYNET_VERSION 4234759
+RUN cd /opt && \
+        git clone https://github.com/clab/dynet.git && \
+        cd dynet && \
+        git checkout ${DYNET_VERSION} && \
+        mkdir build && \
+        cd build && \
+        cmake .. -DEIGEN3_INCLUDE_DIR=/opt/eigen -DBACKEND=cuda && \
+        make -j16 install
+WORKDIR /opt/dynet
