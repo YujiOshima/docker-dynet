@@ -1,12 +1,5 @@
 FROM yujioshima/dynet:base-gpu-in-cpp
 
-# Eigen, version 3.3.4
-ENV EIGEN_VERSION 3.3.4
-RUN cd /opt && \
-        hg clone https://bitbucket.org/eigen/eigen/ && \
-        cd eigen && \
-        hg update -r ${EIGEN_VERSION}
-
 # DyNet, version 4234759
 ENV DYNET_VERSION 4234759
 RUN cd /opt && \
